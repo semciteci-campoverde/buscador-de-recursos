@@ -1,0 +1,4 @@
+node_modules/
+src/App.tsx.bak
+*.log
+.DS_Store
