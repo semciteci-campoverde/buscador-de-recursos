@@ -1145,6 +1145,58 @@ const FED: Fed[] = [
   { nome: "Coronel Roveri", partido: "PODE", cargo: "Deputado federal eleito (2027–2031)", atual: false, tel: ABRE, email: ABRE, site: "https://www.camara.leg.br/deputados/quem-sao", cv: "assume em 01/02/2027", votos: "158 votos em Campo Verde (TSE 2026)" },
 ];
 
+// ===== Emendas federais com destino a Campo Verde (2025–2026) – Transferegov, dados abertos, conferido em 19/11/2026 =====
+type EmR = { parl: string; partido: string; tipo: string; ano: number; objeto: string; valor: number; status: string; cod: string; href: string; indiv: boolean };
+type EmV = { cod: string; doc: string; docHref: string };
+type PedEm = { n: string; d: string; o: string; sapl: number; news: string; obs: string };
+const TGA = "https://api-publica.transferegov.gestao.gov.br/";
+const ESP = (id: number): string => `${TGA}especiais/planos-acao-especiais?id_plano_acao=${id}`;
+const FAF = (id: number): string => `${TGA}parcerias/distribuicao-recurso-proposta?id_proposta=${id}`;
+const PIX = "Emenda Pix (transferência especial)";
+const SAU = "Emenda individual de saúde (fundo a fundo)";
+const APROV = "Proposta aprovada no Transferegov · pagamento: confira no link";
+const EMCV: EmR[] = [
+  { parl: "José Medeiros", partido: "PL", tipo: PIX, ano: 2025, objeto: "Ampliação do sistema de videomonitoramento urbano (Rede de Segurança Inteligente)", valor: 3960000, status: "Empenhado em 01/12/2025 (2025NE009469) · plano de ação CIENTE", cod: "Emenda 202541530005 · plano 09032025-2-086413", href: ESP(86413), indiv: true },
+  { parl: "Wellington Fagundes", partido: "PL", tipo: SAU, ano: 2026, objeto: "Incremento da média e alta complexidade (MAC)", valor: 1800000, status: APROV, cod: "Emenda 2026.3805.0014 · proposta 59499", href: FAF(59499), indiv: true },
+  { parl: "Rodrigo da Zaeli", partido: "PL", tipo: SAU, ano: 2026, objeto: "Reforma de Unidade Básica de Saúde", valor: 699985, status: APROV, cod: "Emenda 2026.4548.0003 · proposta 82511", href: FAF(82511), indiv: true },
+  { parl: "Rodrigo da Zaeli", partido: "PL", tipo: SAU, ano: 2026, objeto: "Incremento ao Piso da Atenção Primária", valor: 500000, status: APROV, cod: "Emenda 2026.4548.0001 · proposta 51344", href: FAF(51344), indiv: true },
+  { parl: "Coronel Assis", partido: "PL", tipo: SAU, ano: 2025, objeto: "Equipamento e material permanente para Unidade Básica de Saúde", valor: 199826, status: APROV, cod: "Emenda 2025.4326.0010 · proposta 41359", href: FAF(41359), indiv: true },
+  { parl: "Jayme Campos", partido: "UNIÃO", tipo: SAU, ano: 2026, objeto: "Incremento ao Piso da Atenção Primária", valor: 800044, status: APROV, cod: "Emenda 2026.2376.0008 · proposta 51345", href: FAF(51345), indiv: true },
+  { parl: "Jayme Campos", partido: "UNIÃO", tipo: PIX, ano: 2026, objeto: "Aquisição de veículo – Assistência Social", valor: 398043.78, status: "Empenhado em 19/06/2026 (2026NE005098) · plano de ação CIENTE", cod: "Emenda 202623760002 · plano 09032026-094677", href: ESP(94677), indiv: true },
+  { parl: "Nelson Barbudo", partido: "PODE", tipo: PIX, ano: 2026, objeto: "Mobiliário de sala de aula (FNDE)", valor: 1990000, status: "Plano de ação CIENTE", cod: "Emenda 202640470014 · plano 09032026-096246", href: ESP(96246), indiv: true },
+  { parl: "Carlos Fávaro", partido: "PSD", tipo: SAU, ano: 2025, objeto: "Aquisição de unidade móvel de saúde", valor: 337667, status: APROV, cod: "Emenda 2025.4201.0003 · proposta 44376", href: FAF(44376), indiv: true },
+  { parl: "Carlos Fávaro", partido: "PSD", tipo: SAU, ano: 2025, objeto: "Equipamento e material permanente", valor: 12282, status: APROV, cod: "Emenda 2025.4201.0003 · proposta 41358", href: FAF(41358), indiv: true },
+  { parl: "Bancada de Mato Grosso", partido: "coletiva", tipo: "Emenda de bancada (saúde)", ano: 2025, objeto: "Incremento ao Piso da Atenção Primária", valor: 2838077, status: APROV, cod: "Emenda 2025.7112.0006 · proposta 41604", href: FAF(41604), indiv: false },
+  { parl: "Comissão de Saúde", partido: "coletiva", tipo: "Emenda de comissão (saúde)", ano: 2026, objeto: "Incremento da média e alta complexidade (MAC)", valor: 1270000, status: APROV, cod: "Emenda 2026.5041.0001 · proposta 86069", href: FAF(86069), indiv: false },
+  { parl: "Comissão de Saúde", partido: "coletiva", tipo: "Emenda de comissão (saúde)", ano: 2026, objeto: "Incremento da média e alta complexidade (MAC)", valor: 1000000, status: APROV, cod: "Emenda 2026.5041.0001 · proposta 85005", href: FAF(85005), indiv: false },
+  { parl: "Comissão de Saúde", partido: "coletiva", tipo: "Emenda de comissão (saúde)", ano: 2025, objeto: "Incremento da média e alta complexidade (MAC)", valor: 500000, status: APROV, cod: "Emenda 2025.5041.0002 · proposta 27977", href: FAF(27977), indiv: false },
+];
+// Vínculo emenda → vereador: só entra aqui com documento oficial (SAPL, Câmara, Prefeitura ou gabinete) que cite o vereador, o parlamentar e o objeto.
+// Pente fino de 19/11/2026: nenhum documento oficial encontrado para os 13 vereadores.
+const EMV: Record<string, EmV[]> = {};
+const CNOT = "https://www.campoverde.mt.leg.br/";
+const PEDEM: Record<string, PedEm[]> = {
+  "paulinho-da-fartura": [
+    { n: "Indicação 287/2026", d: "10/08/2026", o: "Estradas vicinais e segurança – Comunidade Santo Antônio da Fartura", sapl: 7510, news: CNOT + "paulinho-da-fartura-indica-busca-recursos-para-melhorar-estradas-vicinais-e-garantir-mais-seguranca-na-comunidade-santo-antonio-da-fartura/", obs: "" },
+    { n: "Indicação 301/2026", d: "17/08/2026", o: "Pavimentação ecológica – Comunidade Córrego do Ouro", sapl: 7530, news: CNOT + "vereador-paulinho-da-fartura-indica-pavimentacao-ecologica-na-comunidade-corrego-do-ouro/", obs: "" },
+    { n: "Indicação 315/2026", d: "24/08/2026", o: "Pavimentação ecológica – Comunidades Taperinha e Capim Branco", sapl: 7547, news: CNOT + "paulinho-da-fartura-indica-pavimentacao-ecologica-nas-estradas-vicinais-das-comunidades-taperinha-e-capim-branco/", obs: "" },
+    { n: "Indicação 324/2026", d: "31/08/2026", o: "Compactação com impermeabilizante – Comunidades 14 de Agosto e 04 de Outubro", sapl: 7556, news: CNOT + "paulinho-da-fartura-indica-compactacao-com-impermeabilizante-nas-principais-estradas-das-comunidades-14-de-agosto-e-04-de-outubro/", obs: "A ementa no SAPL cita a SINFRA-MT; a notícia da Câmara cita emendas parlamentares." },
+    { n: "Indicação 339/2026", d: "14/09/2026", o: "Compactação com impermeabilizante – Comunidade Bigorna", sapl: 7579, news: CNOT + "paulinho-da-fartura-indica-compactacao-com-impermeabilizante-nas-estradas-vicinais-coletoras-da-comunidade-bigorna/", obs: "" },
+    { n: "Indicação 348/2026", d: "21/09/2026", o: "Pavimentação ecológica – Comunidade Bom Jardim", sapl: 7595, news: CNOT + "vereador-paulinho-da-fartura-indica-pavimentacao-ecologica-para-as-estradas-coletoras-da-comunidade-bom-jardim/", obs: "" },
+    { n: "Indicação 349/2026", d: "21/09/2026", o: "Pavimentação ecológica – Comunidade Mata-Mata", sapl: 7596, news: CNOT + "vereador-paulinho-da-fartura-indica-pavimentacao-ecologica-nas-estradas-da-comunidade-mata-mata/", obs: "" },
+    { n: "Indicação 420/2026", d: "16/11/2026", o: "Pavimentação ecológica – Comunidade Santo Antônio da Fartura", sapl: 7691, news: CNOT + "paulinho-da-fartura-indica-medidas-para-a-execucao-de-pavimentacao-ecologica-nas-estradas-vicinais-da-comunidade-fartura/", obs: "" },
+    { n: "Indicação 421/2026", d: "16/11/2026", o: "Pavimentação ecológica – Comunidade Dom Osório", sapl: 7692, news: CNOT + "paulinho-da-fartura-indica-a-realizacao-de-pavimentacao-ecologica-nas-estradas-vicinais-da-comunidade-dom-osorio/", obs: "" },
+  ],
+  "fabiano-teruel": [
+    { n: "Indicação 294/2026", d: "17/08/2026", o: "Asfalto da Agrovila João Ponce de Arruda até a entrada da Granja do Fábio (recursos próprios ou emendas parlamentares)", sapl: 7523, news: CNOT + "vereador-fabiano-teruel-indica-extensao-de-pavimentacao-asfaltica-da-agrovila-joao-ponce-de-arruda-ate-a-entrada-da-granja-do-fabio/", obs: "A notícia da Câmara cita parceria com João Fique Frio." },
+  ],
+  "joao-fique-frio": [
+    { n: "Indicação 294/2026", d: "17/08/2026", o: "Asfalto da Agrovila João Ponce de Arruda até a entrada da Granja do Fábio (recursos próprios ou emendas parlamentares)", sapl: 7523, news: CNOT + "vereador-fabiano-teruel-indica-extensao-de-pavimentacao-asfaltica-da-agrovila-joao-ponce-de-arruda-ate-a-entrada-da-granja-do-fabio/", obs: "No SAPL o autor é Fabiano Teruel; a notícia da Câmara cita a parceria com João Fique Frio." },
+  ],
+};
+const brl = (n: number): string => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const somaEm = (l: EmR[]): number => l.reduce((s: number, x: EmR) => s + x.valor, 0);
+
 const ALMT = "https://www.al.mt.gov.br/parlamento/deputados/";
 const CENTRAL = "não publicado pela ALMT · central (65) 3313-6900";
 const RADAR = " (Radar do Voto – não verificado em fonte oficial)";
@@ -1700,6 +1752,82 @@ export default function App() {
     );
   };
 
+  const emLinha = (x: EmR, cor: string): ReactNode => (
+    <div key={x.cod} style={{ ...wrap, borderLeft: `4px solid ${cor}`, padding: "6px 10px", marginTop: 6, background: t.bg.base, borderRadius: 8, fontSize: 13 }}>
+      <div style={{ fontWeight: 800, fontSize: 14 }}>{brl(x.valor)} · {x.parl}{x.partido !== "coletiva" ? ` (${x.partido})` : ""} · {x.ano}</div>
+      <div>{x.tipo}: {x.objeto}</div>
+      <div>📌 {x.status}</div>
+      <div style={{ color: t.text.tertiary }}>{x.cod} · {link(x.href, "registro oficial no Transferegov ↗")}</div>
+    </div>
+  );
+  const emendasBloco = (v: Ver): ReactNode => {
+    const ver = v.sexo === "F" ? "esta vereadora" : "este vereador";
+    const vinc = EMV[v.slug] ?? [];
+    const emVinc = vinc.map((e: EmV) => ({ e, r: EMCV.find((x: EmR) => x.cod === e.cod) })).filter((o: { e: EmV; r: EmR | undefined }) => !!o.r);
+    const totV = emVinc.reduce((s: number, o: { e: EmV; r: EmR | undefined }) => s + (o.r ? o.r.valor : 0), 0);
+    const ped = PEDEM[v.slug] ?? [];
+    const doPart = EMCV.filter((x: EmR) => x.partido === v.partido);
+    const indiv = EMCV.filter((x: EmR) => x.indiv);
+    const c1 = C[3 % C.length]; const c2 = C[4 % C.length]; const c3 = C[5 % C.length];
+    const nota = <div style={{ ...wrap, fontSize: 13, padding: 8, borderRadius: 8, background: t.fill.warningSubtle, marginTop: 8 }}>⚖️ <b>Emendas são de autoria dos parlamentares; o vínculo com o vereador vem do documento oficial citado.</b></div>;
+    return (
+      <div>
+        {h("💰 Emendas que ajudou a trazer", c1)}
+        <div style={grid}>
+          {exp(`${v.slug}-em-tot`, c1,
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>Com documento oficial</div>
+              {emVinc.length > 0
+                ? <div><div style={{ fontSize: 28, fontWeight: 900, color: c1 }}>{brl(totV)}</div><div style={{ fontSize: 14 }}>{emVinc.length} emenda(s) · {emVinc.length} documento(s) oficial(is)</div></div>
+                : <div><div style={{ fontSize: 20, fontWeight: 900, color: c1, marginTop: 4 }}>0 emendas comprovadas</div><div style={{ fontSize: 14 }}>Nenhuma emenda com registro oficial vinculando a {ver}.</div></div>}
+            </div>,
+            <div style={{ fontSize: 14 }}>
+              {nota}
+              {emVinc.length > 0 && <div>{sub("📋 Emendas comprovadas")}{emVinc.map((o: { e: EmV; r: EmR | undefined }) => o.r ? <div key={o.e.cod}>{emLinha(o.r, c1)}<div style={{ fontSize: 13, marginLeft: 14 }}>📎 Vínculo: {link(o.e.docHref, o.e.doc)}</div></div> : null)}</div>}
+              {sub("🔎 O que foi conferido (19/11/2026)")}
+              {lista2(["SAPL da Câmara (2025–2026): nenhuma indicação, requerimento ou moção que cite um parlamentar e uma emenda específica já registrada.", "Notícias oficiais da Câmara de Campo Verde: nenhuma credita uma emenda de 2025–2026 a um dos 13 vereadores atuais.", "Transferegov (emendas Pix e saúde fundo a fundo 2025–2026 para Campo Verde): os registros trazem o parlamentar autor, não o vereador."], false)}
+              {sub("🏅 Como registrar o seu crédito")}
+              {checklist(`${v.slug}-em`, ["Protocole no SAPL uma indicação ou requerimento citando o parlamentar, o objeto e o valor. Use o botão Gerar ofício nas suas pautas.", "Mande o ofício ao gabinete e guarde o protocolo e a resposta.", "Quando a emenda aparecer no Transferegov, peça que o número dela conste em ata ou numa moção da Câmara citando o seu pedido.", "Peça ao gabinete do parlamentar que cite o seu nome na divulgação oficial da emenda."])}
+              <div style={{ marginTop: 8 }}>👉 {link(SAPL, "SAPL da Câmara ↗")} · {link(TGOV, "Transferegov ↗")} · {link("https://portaldatransparencia.gov.br/emendas", "Portal da Transparência – emendas ↗")}</div>
+            </div>, "Só dado oficial")}
+          {ped.length > 0 && exp(`${v.slug}-em-ped`, c2,
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>Pedidos de emenda que você já protocolou</div>
+              <div style={{ fontSize: 24, fontWeight: 900, color: c2 }}>{ped.length} pedido(s)</div>
+              <div style={{ fontSize: 14 }}>Nenhuma emenda registrada ainda para esses objetos.</div>
+            </div>,
+            <div style={{ fontSize: 14 }}>
+              {ped.map((p: PedEm) => (
+                <div key={p.n} style={{ ...wrap, borderLeft: `4px solid ${c2}`, padding: "6px 10px", marginTop: 6, background: t.bg.base, borderRadius: 8, fontSize: 13 }}>
+                  <div style={{ fontWeight: 800, fontSize: 14 }}>{p.n} · {p.d}</div>
+                  <div>{p.o}</div>
+                  {p.obs && <div style={{ color: t.text.secondary }}>{p.obs}</div>}
+                  <div>{link(`${SAPL}/materia/${p.sapl}`, "no SAPL ↗")} · {link(p.news, "notícia da Câmara ↗")}</div>
+                </div>
+              ))}
+              {sub("➡️ Próximo passo")}
+              <div>Esses pedidos vão ao Governo do Estado, sem citar um deputado. Para virar emenda, mande o ofício a um deputado estadual (ALMT) entre 01 e 07/12 e cite o número da indicação. Não achamos emenda para esses objetos nos registros federais de 2025–2026.</div>
+              <div style={{ marginTop: 6 }}>👉 {link("https://www.al.mt.gov.br/parlamento/deputados", "Deputados da ALMT ↗")}</div>
+            </div>, "")}
+          {exp(`${v.slug}-em-ctx`, c3,
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>Contexto · do seu partido ({v.partido}) · NÃO atribuído a você</div>
+              {doPart.length > 0
+                ? <div><div style={{ fontSize: 24, fontWeight: 900, color: c3 }}>{brl(somaEm(doPart))}</div><div style={{ fontSize: 14 }}>{doPart.length} emenda(s) federal(is) para Campo Verde em 2025–2026</div></div>
+                : <div style={{ fontSize: 15, marginTop: 4 }}>Nenhum parlamentar federal do {v.partido} mandou emenda para Campo Verde em 2025–2026.</div>}
+            </div>,
+            <div style={{ fontSize: 14 }}>
+              <div style={{ ...wrap, fontSize: 13, padding: 8, borderRadius: 8, background: t.fill.accentSubtle }}>ℹ️ Estes valores são dos parlamentares do seu partido. Não foram trazidos por você, salvo documento oficial que diga isso.</div>
+              {doPart.map((x: EmR) => emLinha(x, c3))}
+              {sub("🏙️ Campo Verde no total (2025–2026)")}
+              <div>{brl(somaEm(indiv))} em {indiv.length} emendas federais individuais e mais {brl(somaEm(EMCV.filter((x: EmR) => !x.indiv)))} em emendas de bancada e de comissão.</div>
+              {small("Fonte: Transferegov, dados abertos (módulos Especiais e Parcerias), conferido em 19/11/2026. Emendas estaduais (ALMT) ainda não foram conferidas na fonte oficial do Estado e não entram nesta conta.")}
+            </div>, "")}
+        </div>
+      </div>
+    );
+  };
+
   const detalhe = (v: Ver, cor: string): ReactNode => {
     const top = topE(v.slug);
     const ord = ACT.filter((e: Eixo) => cnt(v.slug, e) > 0).sort((a: Eixo, b: Eixo) => cnt(v.slug, b) - cnt(v.slug, a)).slice(0, 5);
@@ -1775,6 +1903,8 @@ export default function App() {
               </div>
             </div>, s.body, ""))}
         </div>
+
+        {emendasBloco(v)}
 
         {h("🗺️ Mapa do poder – quem mais pode te ajudar", C[6 % C.length])}
         <div style={{ fontSize: 14, marginBottom: 6 }}>Ordem: primeiro do seu partido, depois quem já mandou recurso para Campo Verde no seu tema ({ENOME[top]}). Todos estão no mandato e podem apresentar emendas para 2027.</div>
