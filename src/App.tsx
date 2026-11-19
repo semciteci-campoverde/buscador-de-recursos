@@ -1195,6 +1195,78 @@ const PEDEM: Record<string, PedEm[]> = {
   ],
 };
 const brl = (n: number): string => n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+// ===== Todas as emendas destinadas a Campo Verde =====
+// [esfera, parlamentar, cargo, ano, tipo, objeto, valor, status, código, beneficiário, código p/ link CGU, valor pago]
+// Federal: CGU – Portal da Transparência (arquivo de 18/11/2026: por favorecido + parcerias FNS). Estadual: CGE-MT – SIGCON/FIPLAN, consultado em 19/11/2026.
+type EmT = [string, string, string, number, string, string, number, string, string, string, string, number];
+const PTD = "https://portaldatransparencia.gov.br/emendas/detalhe?codigoEmenda=";
+const CGEMT = "https://transparencia.cge.mt.gov.br/emendas";
+const EMT: EmT[] = [
+  ["E", "Gilberto Cattani", "Deputado estadual (ALMT)", 2026, "Individual (ALMT)", "Realização da 26ª Feira Comercial de Campo Verde, no Centro de Eventos Esporte Clube Juventude, de 10 a 12/09/2026", 300000.0, "Pago (FIPLAN) R$ 299.999,98", "Emenda 90/2026 · convênio 1481-2026", "Câmara de Dirigentes Lojistas de Campo Verde", "", 299999.98],
+  ["E", "Dr. João", "Deputado estadual (ALMT)", 2026, "Individual (ALMT)", "Inclusão social e desenvolvimento cultural em comunidades vulneráveis de Campo Verde (música, dança, teatro, literatura e poesia)", 300000.0, "Convênio celebrado no SIGCON · execução financeira não exibida no portal", "convênio 1978-2026", "Instituto Germinando Sons", "", 0],
+  ["E", "Nininho", "Deputado estadual (ALMT)", 2026, "Individual (ALMT)", "Fomento ao esporte amador com a 1ª Copa de Futsal de Campo Verde", 299860.32, "Convênio celebrado no SIGCON · execução financeira não exibida no portal", "convênio 0745-2026", "Instituto do Desenvolvimento Econômico, Tecnológico e Cultural", "", 0],
+  ["E", "Fabio Tardin - Fabinho", "Deputado estadual (ALMT)", 2026, "Individual (ALMT)", "Projeto 'Proteção em Movimento' em Campo Verde: cultura e esporte na prevenção da violência doméstica", 290772.32, "Convênio celebrado no SIGCON · execução financeira não exibida no portal", "convênio 1658-2026", "Federação Estadual de Breaking de Mato Grosso (FEBMT)", "", 0],
+  ["E", "Valmir Moretto", "Deputado estadual (ALMT)", 2026, "Individual (ALMT)", "Leitura em família, contação de histórias, teatro e cultura comunitária para famílias da zona rural e urbana de Campo Verde", 269989.95, "Convênio celebrado no SIGCON · execução financeira não exibida no portal", "convênio 0776-2026", "Associação Maranatha", "", 0],
+  ["E", "Thiago Silva", "Deputado estadual (ALMT)", 2026, "Individual (ALMT)", "31º Festival da Canção de Campo Verde (FESCAN), de 05 a 07/11/2026", 200000.0, "Empenhado (FIPLAN), ainda sem pagamento", "Emenda 76/2026 · convênio 2368-2026", "Prefeitura Municipal de Campo Verde", "", 0],
+  ["E", "Beto Dois a Um", "Deputado estadual (ALMT)", 2026, "Individual (ALMT)", "Formação teatral gratuita de crianças e jovens de Campo Verde (duas oficinas)", 150000.0, "Convênio celebrado no SIGCON · execução financeira não exibida no portal", "convênio 1740-2026", "Associação Cultural Celeiro das Artes", "", 0],
+  ["E", "Sebastião Rezende", "Deputado estadual (ALMT)", 2026, "Individual (ALMT)", "Tendas piramidais e caixas d'água para pequenos produtores da agricultura familiar de Campo Verde", 115000.0, "Convênio celebrado no SIGCON · execução financeira não exibida no portal", "convênio 3084-2025", "Prefeitura Municipal de Campo Verde", "", 0],
+  ["E", "Gilberto Cattani", "Deputado estadual (ALMT)", 2026, "Individual (ALMT)", "Energia solar fotovoltaica para a Fazenda da Esperança São João Batista, em Campo Verde", 100000.0, "Convênio celebrado no SIGCON · execução financeira não exibida no portal", "convênio 3226-2025", "Obra Social Nossa Senhora da Glória – Fazenda da Esperança", "", 0],
+  ["E", "Thiago Silva", "Deputado estadual (ALMT)", 2025, "Individual (ALMT)", "Aquisição de caminhonete 4x4 zero km para demandas institucionais do Município", 250000.0, "Pago (FIPLAN) R$ 250.000,00", "Emenda 64/2025 · convênio 3507-2025", "Prefeitura Municipal de Campo Verde", "", 250000.0],
+  ["E", "Gilberto Cattani", "Deputado estadual (ALMT)", 2025, "Individual (ALMT)", "Feira comercial", 250000.0, "Pago (FIPLAN) R$ 250.000,00", "Emenda 104/2025 · convênio 1952-2025", "Câmara de Dirigentes Lojistas de Campo Verde", "", 250000.0],
+  ["E", "Gilberto Cattani", "Deputado estadual (ALMT)", 2024, "Individual (ALMT)", "Feira comercial", 250000.0, "Pago (FIPLAN) R$ 250.000,00", "Emenda 48/2024 · convênio 0637-2024", "Câmara de Dirigentes Lojistas de Campo Verde", "", 250000.0],
+  ["E", "Dr. João", "Deputado estadual (ALMT)", 2024, "Individual (ALMT)", "Programa de formação desportiva (breaking, futevôlei e mini handebol)", 100000.0, "Convênio celebrado no SIGCON · execução financeira não exibida no portal", "convênio 1686-2024", "Associação Campo Verde de Handebol e Esportes", "", 0],
+  ["E", "Valdir Barranco", "Deputado estadual (ALMT)", 2024, "Individual (ALMT)", "Implementos agrícolas para pequenos produtores da agricultura familiar dos assentamentos", 100000.0, "Pago (FIPLAN) R$ 100.000,00", "Emenda 103/2024 · convênio 2560-2024", "Prefeitura Municipal de Campo Verde", "", 100000.0],
+  ["E", "Valdir Barranco", "Deputado estadual (ALMT)", 2023, "Individual (ALMT)", "Playground infantil e academia ao ar livre (ATI) no Assentamento Dom Osório Stoffel", 84952.32, "Convênio celebrado no SIGCON · execução financeira não exibida no portal", "convênio 2113-2022", "Prefeitura Municipal de Campo Verde", "", 0],
+  ["E", "Dr. João", "Deputado estadual (ALMT)", 2022, "Individual (ALMT)", "Aquisição de pá-carregadeira nova (mínimo 150 HP)", 400000.0, "Pago (FIPLAN) R$ 400.000,00", "Emenda 180/2022 · convênio 0545-2022", "Prefeitura Municipal de Campo Verde", "", 400000.0],
+  ["E", "Parlamentar não informado no portal", "", 2022, "Individual (ALMT)", "Aquisição de uma van para a Secretaria de Assistência Social", 300000.0, "Convênio celebrado no SIGCON · execução financeira não exibida no portal", "convênio 0963-2022", "Prefeitura Municipal de Campo Verde", "", 0],
+  ["E", "Wilson Santos", "Deputado estadual (ALMT)", 2022, "Individual (ALMT)", "Patrulha agrícola mecanizada (trator, grade e carreta) para o Assentamento 4 de Outubro", 250000.0, "Pago (FIPLAN) R$ 250.000,00", "Emenda 25/2022 · convênio 1167-2022", "Prefeitura Municipal de Campo Verde", "", 250000.0],
+  ["F", "Nelson Barbudo", "Deputado federal", 2026, "Individual · Pix (transferência especial)", "Mobiliário escolar para as unidades da rede municipal de ensino", 1990000.0, "Pago · recebido em 06/2026", "202640470014", "Município de Campo Verde", "202640470014", 1990000.0],
+  ["F", "Wellington Fagundes", "Senador", 2026, "Individual · saúde fundo a fundo", "Incremento da média e alta complexidade (MAC)", 1800000.0, "Proposta aprovada no FNS/Transferegov · sem pagamento registrado na CGU até 18/11/2026", "202638050014 · parceria 202600014301", "Fundo Municipal de Saúde", "202638050014", 0],
+  ["F", "Comissão de Saúde", "Emenda coletiva", 2026, "Comissão", "Incremento da média e alta complexidade (MAC)", 1270000.0, "Proposta aprovada no FNS/Transferegov · sem pagamento registrado na CGU até 18/11/2026", "202650410001 · parceria 202600040825", "Fundo Municipal de Saúde", "202650410001", 0],
+  ["F", "Comissão de Saúde", "Emenda coletiva", 2026, "Comissão", "Incremento da média e alta complexidade (MAC)", 1000000.0, "Proposta aprovada no FNS/Transferegov · sem pagamento registrado na CGU até 18/11/2026", "202650410001 · parceria 202600039762", "Fundo Municipal de Saúde", "202650410001", 0],
+  ["F", "Jayme Campos", "Senador", 2026, "Individual · saúde fundo a fundo", "Incremento ao Piso da Atenção Primária", 800044.0, "Proposta aprovada no FNS/Transferegov · sem pagamento registrado na CGU até 18/11/2026", "202623760008 · parceria 202600006148", "Fundo Municipal de Saúde", "202623760008", 0],
+  ["F", "Rodrigo da Zaeli", "Deputado federal", 2026, "Individual · saúde fundo a fundo", "Reforma de Unidade Básica de Saúde", 699985.0, "Proposta aprovada no FNS/Transferegov · sem pagamento registrado na CGU até 18/11/2026", "202645480003 · parceria 202600037278", "Fundo Municipal de Saúde", "202645480003", 0],
+  ["F", "Rodrigo da Zaeli", "Deputado federal", 2026, "Individual · saúde fundo a fundo", "Incremento ao Piso da Atenção Primária", 500000.0, "Proposta aprovada no FNS/Transferegov · sem pagamento registrado na CGU até 18/11/2026", "202645480001 · parceria 202600006147", "Fundo Municipal de Saúde", "202645480001", 0],
+  ["F", "Jayme Campos", "Senador", 2026, "Individual · Pix (transferência especial)", "Van com acessibilidade para o Serviço de Convivência e Fortalecimento de Vínculos (CRAS)", 398043.78, "Pago · recebido em 06/2026 e 11/2026", "202623760002", "Município de Campo Verde", "202623760002", 398043.78],
+  ["F", "Emanuel Pinheiro Neto", "Deputado federal", 2026, "Individual · finalidade definida", "Práticas musicais formativas e apresentações públicas em Campo Verde (saúde mental comunitária)", 300000.0, "Pago · recebido em 06/2026", "202639750004", "Instituto Germinando Sons", "202639750004", 300000.0],
+  ["F", "José Medeiros", "Deputado federal", 2025, "Individual · Pix (transferência especial)", "Ampliação do sistema de videomonitoramento urbano, alcançando áreas rurais estratégicas", 3960000.0, "Pago · recebido em 12/2025", "202541530005", "Município de Campo Verde", "202541530005", 3960000.0],
+  ["F", "Bancada de Mato Grosso", "Emenda coletiva", 2025, "Bancada", "Incremento ao Piso da Atenção Primária", 2838077.0, "Pago · recebido em 12/2025", "202571120006", "Fundo Municipal de Saúde", "202571120006", 2838077.0],
+  ["F", "Comissão de Saúde", "Emenda coletiva", 2025, "Comissão", "Incremento da média e alta complexidade (MAC)", 500000.0, "Pago · recebido em 10/2025", "202550410002", "Fundo Municipal de Saúde", "202550410002", 500000.0],
+  ["F", "Carlos Fávaro", "Senador", 2025, "Individual · finalidade definida", "Unidade móvel de saúde e equipamento/material permanente", 349949.0, "Pago · recebido em 12/2025 e 02/2026", "202542010003", "Fundo Municipal de Saúde", "202542010003", 349949.0],
+  ["F", "Coronel Assis", "Deputado federal", 2025, "Individual · finalidade definida", "Equipamento e material permanente para Unidade Básica de Saúde", 199826.0, "Pago · recebido em 02/2026", "202543260010", "Fundo Municipal de Saúde", "202543260010", 199826.0],
+  ["F", "José Medeiros", "Deputado federal", 2024, "Individual · finalidade definida", "Incremento temporário ao custeio da atenção primária à saúde", 1000000.0, "Pago · recebido em 12/2024", "202441530002", "Fundo Municipal de Saúde", "202441530002", 1000000.0],
+  ["F", "Amália Barros", "Deputada federal", 2024, "Individual · Pix (transferência especial)", "Construção de sala multissensorial (68,15 m²) e equipamentos permanentes", 500000.0, "Pago · recebido em 12/2024", "202442970002", "Município de Campo Verde", "202442970002", 500000.0],
+  ["F", "José Medeiros", "Deputado federal", 2023, "Individual · Pix (transferência especial)", "Centro de Controle de Operações (CCO) e ampliação do monitoramento por câmeras", 7000000.0, "Pago · recebido em 08/2023 a 10/2023", "202341530009", "Município de Campo Verde", "202341530009", 7000000.0],
+  ["F", "Neri Geller", "Deputado federal", 2021, "Individual · finalidade definida", "Construção de um salão para lutas", 429750.0, "Pago · recebido em 05/2023", "202125860006", "Município de Campo Verde", "202125860006", 429750.0],
+  ["F", "Relator-geral do Orçamento", "Emenda coletiva", 2021, "Relator", "Aquisição de veículo rodoviário", 350000.0, "Pago · recebido em 06/2022", "202181000741", "Município de Campo Verde", "202181000741", 350000.0],
+  ["F", "José Medeiros", "Deputado federal", 2021, "Individual · Pix (transferência especial)", "Ar-condicionado e móveis para a Assistência Social (Centro de Atendimento ao Idoso)", 250000.0, "Pago · recebido em 09/2021", "202141530005", "Município de Campo Verde", "202141530005", 250000.0],
+  ["F", "Bancada de Mato Grosso", "Emenda coletiva", 2021, "Bancada", "Patrulha agrícola (trator e equipamentos)", 150196.58, "Pago · recebido em 03/2022", "202171120012", "Município de Campo Verde", "202171120012", 150196.58],
+  ["F", "Relator-geral do Orçamento", "Emenda coletiva", 2020, "Relator", "Ações múltiplas (objeto não detalhado pela CGU)", 322107.78, "Pago · recebido em 12/2020", "202081001503", "Município de Campo Verde", "202081001503", 322107.78],
+  ["F", "Dr. Leonardo", "Deputado federal", 2020, "Individual · finalidade definida", "Veículo para transporte escolar (Caminho da Escola)", 200000.0, "Pago · recebido em 12/2022", "202039620007", "Município de Campo Verde", "202039620007", 200000.0],
+  ["F", "Juíza Selma", "Senadora", 2020, "Individual · finalidade definida", "Veículo para transporte escolar (Caminho da Escola)", 200000.0, "Pago · recebido em 11/2022", "202040850003", "Município de Campo Verde", "202040850003", 200000.0],
+  ["F", "Bancada de Mato Grosso", "Emenda coletiva", 2020, "Bancada", "Estudos, projetos e planejamento de infraestrutura de transportes", 5572.96, "Pago · recebido em 10/2020 a 12/2021", "202071120013", "Município de Campo Verde", "202071120013", 5572.96],
+  ["F", "José Medeiros", "Deputado federal", 2018, "Individual · finalidade definida", "Aquisição de maquinário", 386135.0, "Pago · recebido em 07/2019", "201837920001", "Município de Campo Verde", "201837920001", 386135.0],
+  ["F", "Fábio Garcia", "Deputado federal", 2017, "Individual · finalidade definida", "Aquisição de uma pá-carregadeira", 250000.0, "Pago · recebido em 05/2019", "201731010003", "Município de Campo Verde", "201731010003", 250000.0],
+  ["F", "Autor não informado (CGU)", "", 2017, "Relator", "Repasse à cooperativa de agricultores familiares do Assentamento Santo Antônio da Fartura (objeto não detalhado)", 221583.2, "Pago · recebido de 04/2017 a 02/2018", "código não informado", "COOPERSAF", "", 221583.2],
+  ["F", "Autor não informado (CGU)", "", 2017, "Bancada", "Objeto não detalhado pela CGU", 1096.5, "Pago · recebido em 12/2017", "código não informado", "Município de Campo Verde", "", 1096.5],
+  ["F", "Adilton Sachetti", "Deputado federal", 2016, "Individual · finalidade definida", "Estruturação dos serviços de urgência e emergência", 500000.0, "Pago · recebido em 12/2016", "201630350020", "Fundo Municipal de Saúde", "201630350020", 500000.0],
+  ["F", "Fábio Garcia", "Deputado federal", 2016, "Individual · finalidade definida", "Estruturação de unidades de atenção especializada em saúde", 250000.0, "Pago · recebido em 12/2016", "201631010002", "Fundo Municipal de Saúde", "201631010002", 250000.0],
+  ["F", "Relator-geral do Orçamento", "Emenda coletiva", 2016, "Comissão", "Apoio à infraestrutura para a educação básica", 249740.0, "Pago · recebido em 12/2016", "código não informado", "Município de Campo Verde", "", 249740.0],
+  ["F", "Blairo Maggi", "Senador", 2016, "Individual · finalidade definida", "Estruturação da rede de atenção primária à saúde", 199980.0, "Pago · recebido em 12/2016 a 05/2017", "201623400004", "Fundo Municipal de Saúde", "201623400004", 199980.0],
+  ["F", "Saguas Moraes", "Deputado federal", 2016, "Individual · finalidade definida", "Ações múltiplas (objeto não detalhado pela CGU)", 199975.0, "Pago · recebido em 12/2016", "201628250004", "Fundo Municipal de Saúde", "201628250004", 199975.0],
+  ["F", "Autor não informado (CGU)", "", 2016, "Individual · finalidade definida", "Estruturação de unidades de atenção especializada em saúde", 100000.0, "Pago · recebido em 06/2016", "código não informado", "Fundo Municipal de Saúde", "", 100000.0],
+  ["F", "Saguas Moraes", "Deputado federal", 2015, "Individual · finalidade definida", "Drenagem e pavimentação de vias no Bairro São Miguel", 938150.0, "Pago · recebido de 11/2017 a 07/2021", "201528250012", "Município de Campo Verde", "201528250012", 938150.0],
+  ["F", "Autor não informado (CGU)", "", 2015, "Individual · finalidade definida", "Aquisição de patrulha mecanizada (emenda de 2014, convênio 804436; ano do pagamento)", 160000.0, "Pago · recebido em 02/2015", "código não informado", "Município de Campo Verde", "", 160000.0],
+  ["F", "Blairo Maggi", "Senador", 2015, "Individual · finalidade definida", "Estruturação da rede de atenção primária à saúde", 99985.0, "Pago · recebido em 11/2016", "201523400003", "Fundo Municipal de Saúde", "201523400003", 99985.0],
+];
+const EMT_REG: [string, string, number, string][] = [
+  ["Dr. João", "4ª Copa Integração de Campo Verde, Planalto da Serra e Nova Brasilândia", 319703.0, "convênio 0874-2026"],
+  ["Elizeu Nascimento", "Projeto de taekwondo em Campo Verde e Primavera do Leste", 299899.72, "convênio 1975-2026"],
+  ["Diego Guimarães", "Espetáculo BORDERLINE em 6 municípios, incluindo Campo Verde", 147082.76, "convênio 1174-2026"],
+];
+const somaT = (l: EmT[]): number => l.reduce((s: number, x: EmT) => s + x[6], 0);
+const pagoT = (l: EmT[]): number => l.reduce((s: number, x: EmT) => s + x[11], 0);
 const somaEm = (l: EmR[]): number => l.reduce((s: number, x: EmR) => s + x.valor, 0);
 
 const ALMT = "https://www.al.mt.gov.br/parlamento/deputados/";
@@ -1468,6 +1540,7 @@ export default function App() {
   const [ofi, setOfi] = useState<Record<string, string>>({});
   const [extra, setExtra] = useState<Record<number, string>>({});
   const [msg, setMsg] = useState<string>("");
+  const [anoEm, setAnoEm] = useState<number>(0);
   const tog = (k: string) => setAbre((o: Record<string, boolean>) => ({ ...o, [k]: !o[k] }));
 
   const wrap: CSSProperties = { minWidth: 0, overflowWrap: "anywhere", wordBreak: "break-word", boxSizing: "border-box" };
@@ -1975,6 +2048,75 @@ export default function App() {
     </div>
   );
 
+  const todasEmendas = (): ReactNode => {
+    const anos = Array.from(new Set(EMT.map((r: EmT) => r[3]))).sort((a: number, b: number) => b - a);
+    const rows = EMT.filter((r: EmT) => anoEm === 0 || r[3] === anoEm);
+    const per = anoEm === 0 ? "todos os anos" : `ano ${anoEm}`;
+    const esf = [
+      { id: "F", nome: "🇧🇷 Federal – deputados federais, senadores, bancada, comissões e relator", cor: C[2 % C.length], nota: "Fonte: CGU – Portal da Transparência (arquivo de 18/11/2026). Valor = o que a Prefeitura, o Fundo Municipal de Saúde e entidades sem fins lucrativos de Campo Verde receberam; nas propostas de saúde de 2026 ainda sem pagamento, o valor aprovado. Período: 2015–2026 (ano da emenda)." },
+      { id: "E", nome: "🏛️ Estadual – deputados da ALMT", cor: C[1 % C.length], nota: "Fonte: CGE-MT – Portal da Transparência de Mato Grosso (SIGCON/FIPLAN), consultado em 19/11/2026. Só convênios com proponente ou objeto exclusivo de Campo Verde. O portal cobre 2019–2026; os registros de Campo Verde começam em 2022." },
+    ];
+    const tot = somaT(rows);
+    const stat = (rot: string, val: string, sub2: string, cor: string): ReactNode => (
+      <div key={rot} style={{ ...wrap, borderRadius: 14, padding: 14, background: t.bg.elevated, border: `2px solid ${cor}` }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>{rot}</div>
+        <div style={{ fontSize: 26, fontWeight: 900, color: cor }}>{val}</div>
+        <div style={{ fontSize: 13 }}>{sub2}</div>
+      </div>
+    );
+    const linhaT = (r: EmT, i: number, cor: string): ReactNode => (
+      <div key={`${r[8]}-${i}`} style={{ ...wrap, borderLeft: `4px solid ${cor}`, padding: "6px 10px", marginTop: 6, background: t.bg.base, borderRadius: 8, fontSize: 13 }}>
+        <div style={{ fontWeight: 800, fontSize: 14 }}>{brl(r[6])} · {r[3]} · {r[4]}</div>
+        <div>{r[5]}</div>
+        <div>📌 {r[7]}</div>
+        <div style={{ color: t.text.secondary }}>🏢 {r[9]}</div>
+        <div style={{ color: t.text.tertiary }}>{r[8]} · {r[0] === "F" ? (r[10] ? link(PTD + r[10], "registro oficial na CGU ↗") : link("https://portaldatransparencia.gov.br/emendas", "Portal da Transparência ↗")) : link(CGEMT, "portal da CGE-MT ↗ (pesquise o nº do convênio)")}</div>
+      </div>
+    );
+    return (
+      <div>
+        {h("💰 Todas as emendas destinadas a Campo Verde", C[3 % C.length])}
+        <div style={{ fontSize: 15, marginBottom: 8 }}>Separadas por esfera e por parlamentar. Toque em um parlamentar para ver cada emenda: ano, objeto, tipo, valor, situação e o link do registro oficial.</div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
+          <button onClick={() => setAnoEm(0)} style={chip(C[3 % C.length], anoEm === 0)}>Todos os anos</button>
+          {anos.map((a: number) => <button key={a} onClick={() => setAnoEm(a)} style={chip(C[3 % C.length], anoEm === a)}>{a}</button>)}
+        </div>
+        <div style={grid}>
+          {stat(`Total geral · ${per}`, brl(tot), `${rows.length} emendas · ${brl(pagoT(rows))} com pagamento registrado`, C[3 % C.length])}
+          {esf.map((e: { id: string; nome: string; cor: string; nota: string }) => { const l = rows.filter((r: EmT) => r[0] === e.id); return stat(e.id === "F" ? "🇧🇷 Federal" : "🏛️ Estadual (ALMT)", brl(somaT(l)), `${l.length} emendas · ${new Set(l.map((r: EmT) => r[1])).size} autores · ${brl(pagoT(l))} pagos`, e.cor); })}
+          {stat("🏙️ Municipal", "—", "Campo Verde não possui emendas impositivas de vereadores", C[0])}
+        </div>
+        {esf.map((e: { id: string; nome: string; cor: string; nota: string }) => {
+          const l = rows.filter((r: EmT) => r[0] === e.id);
+          const grupos: Record<string, EmT[]> = {};
+          l.forEach((r: EmT) => { (grupos[r[1]] = grupos[r[1]] ?? []).push(r); });
+          const nomes = Object.keys(grupos).sort((a: string, b: string) => somaT(grupos[b]) - somaT(grupos[a]));
+          return (
+            <div key={e.id}>
+              <div style={{ fontSize: 18, fontWeight: 800, color: e.cor, margin: "20px 0 4px" }}>{e.nome} · {brl(somaT(l))}</div>
+              <div style={{ fontSize: 12, color: t.text.tertiary, marginBottom: 8 }}>{e.nota}</div>
+              {nomes.length === 0 ? <div style={{ fontSize: 14 }}>Nenhuma emenda registrada para Campo Verde em {per}.</div> :
+                <div style={grid}>{nomes.map((n: string, k: number) => { const g = grupos[n]; const cor = C[(k + (e.id === "F" ? 2 : 5)) % C.length]; return exp(`emt-${e.id}-${n}`, cor,
+                  <div>
+                    <div style={{ fontSize: 22, fontWeight: 900, color: cor }}>#{k + 1}</div>
+                    <div style={{ fontWeight: 800, fontSize: 17 }}>{n}</div>
+                    {g[0][2] && <div style={{ fontSize: 13, color: t.text.secondary }}>{g[0][2]}</div>}
+                    <div style={{ fontSize: 24, fontWeight: 900, color: cor, marginTop: 4 }}>{brl(somaT(g))}</div>
+                    <div style={{ fontSize: 13 }}>{g.length} emenda(s) · {brl(pagoT(g))} pagos</div>
+                  </div>,
+                  <div>{g.map((r: EmT, i: number) => linhaT(r, i, cor))}</div>, ""); })}</div>}
+            </div>
+          );
+        })}
+        <div style={{ fontSize: 18, fontWeight: 800, color: C[0], margin: "20px 0 4px" }}>🏙️ Municipal</div>
+        <div style={{ fontSize: 14 }}>Campo Verde não possui emendas impositivas de vereadores.</div>
+        <div style={{ ...wrap, fontSize: 13, padding: 10, borderRadius: 10, background: t.fill.accentSubtle, marginTop: 12 }}>
+          ℹ️ <b>Fora da soma:</b> R$ 5,52 mi pagos pela CGU a empresas e pessoas com sede em Campo Verde (fornecedores de compras feitas em outros lugares, como aviação agrícola em 2020) e projetos estaduais regionais que incluem Campo Verde junto com outras cidades: {EMT_REG.map((r: [string, string, number, string]) => `${r[0]} (${brl(r[2])}, ${r[1]})`).join("; ")}. Repasses estaduais fundo a fundo sem convênio (ex.: Fundo Estadual de Saúde) não aparecem por município no portal da CGE-MT e não entram aqui.
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Page title="Buscador de Recursos – Vereadores de Campo Verde" width="full">
     <div style={{ fontFamily: t.font.family, color: t.text.primary, background: t.bg.base, padding: "16px clamp(8px, 1.5vw, 24px) 40px", minHeight: "100vh", overflowX: "hidden", boxSizing: "border-box", width: "100%" }}>
@@ -1989,6 +2131,8 @@ export default function App() {
 
       {h("⏰ Prazos para pedir recursos (contagem ao vivo)", t.text.danger)}
       {timeline()}
+
+      {todasEmendas()}
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 10, margin: "18px 0" }}>
         {abas.map((a: { id: string; label: string; cor: string }) => (<button key={a.id} onClick={() => setAba(a.id)} style={chip(a.cor, aba === a.id)}>{a.label}</button>))}
